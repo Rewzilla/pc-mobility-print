@@ -17,10 +17,12 @@ python3 ./main.py add PrinterNameHere
 
 ## Optional parameters
 
- - -i           : Don't verify print server SSL
- - -d DOMAIN    : May or may not need to be specified for your network (ex: corp.local)
- - -u USERNAME  : Only needed if adding a printer. If not specified, prompt user
- - -d PASSWORD  : Only needed if adding a printer. If not specified, prompt user
+```
+-i           : Don't verify print server SSL
+-d DOMAIN    : May or may not need to be specified for your network (ex: corp.local)
+-u USERNAME  : Only needed if adding a printer. If not specified, prompt user
+-d PASSWORD  : Only needed if adding a printer. If not specified, prompt user
+```
 
 # License
 
