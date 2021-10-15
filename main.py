@@ -6,7 +6,7 @@ from pcmobilityprint import *
 
 def main(args):
 
-	pcmp = PCMobilityPrint(args.domain)
+	pcmp = PCMobilityPrint(server=args.server, domain=args.domain)
 
 	if args.insecure:
 		pcmp.verify_ssl = False
@@ -19,6 +19,30 @@ def main(args):
 		print("-------------------------+---------------------")
 		for printer in printers:
 			print(f"{printer['name']:24} | {printer['description']}")
+
+	elif args.action == "get":
+
+		if args.username == None:
+			username = input("Username: ")
+		else:
+			username = args.username
+
+		if args.password == None:
+			password = getpass.getpass("Password: ")
+		else:
+			password = args.password
+
+		if not pcmp.authenticate(username, password):
+			print("Authentication error")
+			return
+
+		url = pcmp.get_printer(args.arg[0])
+		print(url)
+
+	elif args.action == "desc":
+
+		desc = pcmp.get_description(args.arg[0])
+		print(desc)
 
 	elif args.action == "add":
 
@@ -36,18 +60,17 @@ def main(args):
 			print("Authentication error")
 			return
 
-		url = pcmp.get_printer(args.arg[0])
-
-		print(url)
+		pcmp.add_printer(args.arg[0])
 
 if __name__ == "__main__":
 
 	parser = argparse.ArgumentParser()
 
-	parser.add_argument("action", help="Required positional argument")
-	parser.add_argument("arg", nargs="*", help="Optional positional argument")
+	parser.add_argument("action", help="list, get, desc, add")
+	parser.add_argument("arg", nargs="*", help="i.e. 'action <printername>'")
 	parser.add_argument("-i", "--insecure", action="store_true", default=False, help="Don't verify SSL")
-	parser.add_argument("-d", "--domain", action="store", dest="domain")
+	parser.add_argument("-s", "--server", action="store", dest="server", default=None)
+	parser.add_argument("-d", "--domain", action="store", dest="domain", default=None)
 	parser.add_argument("-u", "--username", action="store", dest="username", default=None)
 	parser.add_argument("-p", "--password", action="store", dest="password", default=None)
 

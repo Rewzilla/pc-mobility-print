@@ -4,12 +4,16 @@ import ssl
 import socket
 import base64
 import urllib.request
+import subprocess
 
 class PCMobilityPrint:
 
-	def __init__(self, search_domain):
+	def __init__(self, server=None, domain=None):
 
-		self.host = self.resolve_host(search_domain)
+		if server:
+			self.host = server
+		else:
+			self.host = self.resolve_host(domain)
 
 		# TODO: Error checking if host resolve failed
 
@@ -19,7 +23,7 @@ class PCMobilityPrint:
 		self.password = None
 		self.verify_ssl = True
 
-	def resolve_host(self, search_domain):
+	def resolve_host(self, domain):
 
 		try:
 
@@ -34,15 +38,15 @@ class PCMobilityPrint:
 				if h != None:
 					return d
 
-			if search_domain is not None:
+			if domain is not None:
 
-				d = f"rpc.pc-printer-discovery.{search_domain}"
+				d = f"rpc.pc-printer-discovery.{domain}"
 				h = socket.gethostbyname(d)
 				if h != None:
 					return d
 
 				for i in range(1, 21):
-					d = f"rpc.pc-printer-discovery-{i}.{search_domain}"
+					d = f"rpc.pc-printer-discovery-{i}.{domain}"
 					h = socket.gethostbyname(d)
 					if h != None:
 						return d
@@ -114,3 +118,41 @@ class PCMobilityPrint:
 
 			# TODO: better error handling
 			return None
+
+	def get_description(self, name):
+
+		# TODO: Error checking if host not set
+
+		printers = self.get_printers()
+
+		for p in printers:
+			if p["name"] == name:
+				return p["description"]
+
+		return False
+
+	def add_printer(self, name):
+
+		# TODO: Error checking if host not set
+		# TODO: Error checking if not authenticated
+
+		url = self.get_printer(name)
+		desc = self.get_description(name)
+
+		# TODO: Error checking if printer not found
+
+		if not url:
+			return False
+
+		try:
+
+			# TODO: -L<location> and -D<description> may not always be the same thing
+			cmd = ["/usr/sbin/lpadmin", "-p", name, "-E", "-L", desc, "-D", desc, "-v", url]
+			subprocess.call(cmd)
+
+			return True
+
+		except:
+
+			# TODO: better error handling
+			return False
