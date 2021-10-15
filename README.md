@@ -27,6 +27,8 @@ python3 ./main.py desc <printername>
 python3 ./main.py add <printername>
 ```
 
+NOTE: You may need to log into CUPS afterward and specify a driver in order for this to work.
+
 ## Optional parameters
 
 ```
