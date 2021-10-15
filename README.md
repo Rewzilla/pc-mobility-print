@@ -3,25 +3,39 @@ UNOFFICIAL PaperCut Mobility Print Linux command line client
 
 # Usage
 
-## Getting a list of printers
+## Get a list of printers
 
 ```
 python3 ./main.py list
 ```
 
-## Adding a printer
+## Get a printer IPP URL
 
 ```
-python3 ./main.py add PrinterNameHere
+python3 ./main.py add <printername>
+```
+
+## Get a printer description
+
+```
+python3 ./main.py desc <printername>
+```
+
+## Attempt to automatically add a printer to CUPS
+
+```
+python3 ./main.py add <printername>
 ```
 
 ## Optional parameters
 
 ```
--i           : Don't verify print server SSL
--d DOMAIN    : May or may not need to be specified for your network (ex: corp.local)
--u USERNAME  : Only needed if adding a printer. If not specified, prompt user
--d PASSWORD  : Only needed if adding a printer. If not specified, prompt user
+  -h, --help            show this help message and exit
+  -i, --insecure        Don't verify SSL
+  -s SERVER, --server SERVER
+  -d DOMAIN, --domain DOMAIN
+  -u USERNAME, --username USERNAME
+  -p PASSWORD, --password PASSWORD
 ```
 
 # License
