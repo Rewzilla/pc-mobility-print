@@ -12,7 +12,7 @@ python3 ./main.py list
 ## Get a printer IPP URL
 
 ```
-python3 ./main.py add <printername>
+python3 ./main.py get <printername>
 ```
 
 ## Get a printer description
