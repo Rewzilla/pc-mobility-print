@@ -3,6 +3,14 @@ UNOFFICIAL PaperCut Mobility Print Linux client
 
 # Usage (GUI)
 
+## Install dependencies
+
+```
+apt install python3-tk
+```
+
+## Start the GUI
+
 ```
 python3 ./gui.py
 ```
