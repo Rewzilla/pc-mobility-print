@@ -1,3 +1,4 @@
+from tkinter import messagebox
 from pcmobilityprint import *
 import tkinter.font as tkFont
 from tkinter import ttk
@@ -166,19 +167,12 @@ class App:
 
 
     def scan_button_command(self):
-        ##
-        # TODO: Test in an actual environment
-        # Commented lines can be uncommented and played with but they should be
-        # close to correct
-        # Also maybe change the code to look readable
-        ##
+        self.update_pcmp()
         self.printer_list.delete(0, END)
-        #printers = self.pcmp.get_printers()
-        #self.network_printer_list.set(' '.join([f"{printer['name']:24}" for printer in printers]))
+        printers = self.pcmp.get_printers()
+        self.network_printer_list.set(' '.join([f"{printer['name']:24}" for printer in printers]))
 
-        # Dummy Data for now
-        self.network_printer_list = "test1 test2 test3 test4"
-        for printer in self.network_printer_list.split(" "):
+        for printer in self.network_printer_list.get().split(" "):
             self.printer_list.insert(END, printer)
 
     def add_button_command(self):
@@ -194,7 +188,9 @@ class App:
         selected_printers = self.printer_list.curselection()
         for i in selected_printers:
             entry = self.printer_list.get(i)
-            pcmp.add_printer(entry)
+            self.pcmp.add_printer(entry)
+
+        messagebox.showinfo('Success!','Printers added!')
 
     def update_pcmp(self):
         server_entry = self.server.get()
