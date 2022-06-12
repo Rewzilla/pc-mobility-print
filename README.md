@@ -1,30 +1,36 @@
 # pc-mobility-print
-UNOFFICIAL PaperCut Mobility Print Linux command line client
+UNOFFICIAL PaperCut Mobility Print Linux client
 
-# Usage
+# Usage (GUI)
+
+```
+python3 ./gui.py
+```
+
+# Usage (Command line)
 
 ## Get a list of printers
 
 ```
-python3 ./main.py list
+python3 ./cli.py list
 ```
 
 ## Get a printer IPP URL
 
 ```
-python3 ./main.py get <printername>
+python3 ./cli.py get <printername>
 ```
 
 ## Get a printer description
 
 ```
-python3 ./main.py desc <printername>
+python3 ./cli.py desc <printername>
 ```
 
 ## Attempt to automatically add a printer to CUPS
 
 ```
-python3 ./main.py add <printername>
+python3 ./cli.py add <printername>
 ```
 
 NOTE: You may need to log into CUPS afterward and specify a driver in order for this to work.
