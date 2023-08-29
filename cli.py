@@ -8,7 +8,9 @@ def main(args):
 
 	pcmp = PCMobilityPrint(server=args.server, domain=args.domain)
 
-	if args.insecure:
+	if args.verify_ssl:
+		pcmp.verify_ssl = True
+	else:
 		pcmp.verify_ssl = False
 
 	if args.action == "list":
@@ -68,7 +70,7 @@ if __name__ == "__main__":
 
 	parser.add_argument("action", help="list, get, desc, add")
 	parser.add_argument("arg", nargs="*", help="i.e. 'action <printername>'")
-	parser.add_argument("-i", "--insecure", action="store_true", default=False, help="Don't verify SSL")
+	parser.add_argument("-t", "--verifytls", action="store_true", default=False, dest="verify_ssl", help="Verify server TLS certificate")
 	parser.add_argument("-s", "--server", action="store", dest="server", default=None)
 	parser.add_argument("-d", "--domain", action="store", dest="domain", default=None)
 	parser.add_argument("-u", "--username", action="store", dest="username", default=None)

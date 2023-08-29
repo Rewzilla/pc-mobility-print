@@ -23,7 +23,7 @@ class PCMobilityPrint:
 		self.baseurl = f"https://{self.socket}"
 		self.username = None
 		self.password = None
-		self.verify_ssl = True
+		self.verify_ssl = False
 
 	def resolve_host(self, domain):
 
