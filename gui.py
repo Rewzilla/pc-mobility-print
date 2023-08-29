@@ -172,8 +172,9 @@ class App:
         printers = self.pcmp.get_printers()
         self.network_printer_list.set(' '.join([f"{printer['name']:24}" for printer in printers]))
 
-        for printer in self.network_printer_list.get().split(" "):
-            self.printer_list.insert(END, printer)
+# ??? this adds duplicate lines, looks broken, commenting out unless there's a reason I don't understand?
+#        for printer in self.network_printer_list.get().split(" "):
+#            self.printer_list.insert(END, printer)
 
     def add_button_command(self):
         self.update_pcmp()
