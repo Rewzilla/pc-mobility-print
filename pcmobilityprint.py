@@ -6,6 +6,8 @@ import base64
 import urllib.request
 import subprocess
 
+version = "1.0"
+
 class PCMobilityPrint:
 
 	def __init__(self, server=None, domain=None):

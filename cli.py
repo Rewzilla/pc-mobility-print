@@ -73,6 +73,7 @@ if __name__ == "__main__":
 	parser.add_argument("-d", "--domain", action="store", dest="domain", default=None)
 	parser.add_argument("-u", "--username", action="store", dest="username", default=None)
 	parser.add_argument("-p", "--password", action="store", dest="password", default=None)
+	parser.add_argument("-v", "--version", action="version", version=version)
 
 	args = parser.parse_args()
 
